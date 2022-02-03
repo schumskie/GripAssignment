@@ -13,8 +13,9 @@ Tests are under `tests` folder.
 
 - `get_users` - If this function is meant to be used often on huge datasets, possible improvement could be to use
   adapted binary search for finding left-most and rightmost record, and then filter everything between.
-  In worst case scenario complexity would be a bit worse than it is now `O(N*logN)` but in practice it could perform 
-  much better especially in cases where length of desired output is much smaller than whole dataset. 
+  In worst case scenario complexity would be a bit worse than it is now `O(N*logN)` instead of `O(N)`
+  but in practice it could perform much better especially in cases where length of desired output is much
+  smaller than whole dataset. 
 - `get_playback_time` - Not recognized possible improvements. (Except to throw an Exception for bad data).
 - Known limitation for first two functions is that they won't work if input list is **not ordered**. `get_playback_time`
   can not produce reliable results if some user records do not have its pair record (start or end action). It expects
