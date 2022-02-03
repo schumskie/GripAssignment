@@ -79,3 +79,36 @@ def get_playback_time(user_id: int, records: List[Record]) -> int:
             total += record.date_actioned - last
 
     return total
+
+
+def get_user_permissions(
+    user_id: int, apps: List[dict], app_features: List[dict], user_features: list[dict]
+) -> dict:
+    """
+    Returns the list of permissions for a given user.
+
+    :param user_id: id of user.
+    :param apps: list of available user apps.
+    :param app_features: list of available application features
+    :param user_features: list of features provided to the user
+    :return: User permissions.
+    """
+    # normalize data
+    app_features_map = {
+        record["app_id"]: set(record["features_available"]) for record in app_features
+    }
+    user_features_map = {
+        record["user_id"]: set(record["features_allowed"]) for record in user_features
+    }
+    permissions = []
+    for app in apps:
+        features_allowed = []
+        app_id = app["app_id"]
+        if app_id in app_features_map and user_id in user_features_map:
+            features_allowed = sorted(
+                app_features_map[app_id].intersection(user_features_map[user_id])
+            )
+        permissions.append(
+            {"app_id": app_id, "features_allowed": features_allowed}
+        )
+    return {"user_id": user_id, "application_permissions": permissions}

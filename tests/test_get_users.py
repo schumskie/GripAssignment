@@ -1,5 +1,3 @@
-import pytest as pytest
-
 from assignments import get_users
 from record import Action
 
