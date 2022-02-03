@@ -41,7 +41,7 @@ pip install -r requirements.txt
 How to seed database (CSV file):
 
 ```
-python generate_db
+python generate_db.py
 ```
 
 How to run tests (database seeding not required):
